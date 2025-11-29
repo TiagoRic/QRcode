@@ -1,0 +1,128 @@
+<html>
+<head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Poppins", sans-serif;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(120deg, #ff7eb3, #65d3ff);
+            background-size: 300% 300%;
+            animation: bgAnimation 12s ease infinite;
+        }
+
+        @keyframes bgAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .box {
+            position: relative; /* IMPORTANTE: para que o botão absoluto fique dentro */
+            background: rgba(194, 190, 190, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            width: 1650px;
+            height: 775px; /* altura fixa para garantir limite */
+            text-align: center;
+            border-radius: 20px;
+            color: white;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 1s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .box p {
+            font-size: 22px;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            position: relative;
+            height: 500px; /* espaço para o botão se mover */
+        }
+
+        button {
+            height: 40px;
+            width: 90px;
+            border: none;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        #yes {
+            background: #ffffff;
+            color: #ff008c;
+        }
+
+        #yes:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(255, 0, 140, 0.4);
+        }
+
+        #no {
+            background: #ffffff;
+            color: #007bff;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+        <p>QUERES NAMORAR COMIGO? 💖</p>
+
+        <div class="button-container">
+            <a href="https://www.youtube.com/watch?v=cz1Egnv_2aU">
+                <button id="yes">Sim 💕</button>
+            </a>
+
+            <button id="no">Não 😭</button>
+        </div>
+    </div>
+
+    <script>
+    const button = document.getElementById('no');
+    const box = document.querySelector('.box');
+
+    button.addEventListener('mouseover', function() {
+        const boxRect = box.getBoundingClientRect();
+        const buttonRect = button.getBoundingClientRect();
+
+        // Limites máximos dentro da caixa
+        const maxTop = boxRect.height - buttonRect.height;
+        const maxLeft = boxRect.width - buttonRect.width;
+
+        // Posições aleatórias dentro dos limites
+        const top = Math.random() * maxTop;
+        const left = Math.random() * maxLeft;
+
+        button.style.position = 'absolute';
+        button.style.top = top + "px";
+        button.style.left = left + "px";
+    });
+
+    </script>
+
+</body>
+</html>
